@@ -80,8 +80,8 @@ function App() {
       //console.log('Form is valid. Connecting with key:', key);
       // Add your socket connection or other logic here
       setIsFormConnectValid(true);
-      setCookie("manager_key", key);
       if(isConnect) {
+        setCookie("manager_key", key);
         setCountdown(timeToWait);
         setIsConnect(false);
         startCountdown();
