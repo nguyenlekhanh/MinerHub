@@ -226,7 +226,7 @@ function App() {
                 <button type="submit" className="btn btn-success"
                         disabled={!isServerConnected}
                         onClick={(e) => countdown<=0 && setIsConnect(true)}>
-                  {countdown <= 0 ? "Connect" : "Wait for next connection: " + countdown}
+                  {countdown <= 0 ? "Connect" : "Cooldown: " + countdown}
                 </button>
               </div>
 
