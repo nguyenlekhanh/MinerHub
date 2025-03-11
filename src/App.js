@@ -305,7 +305,7 @@ function App() {
             <h5>* Command and Machine Information</h5>
 
             {/* Table to show the commands, machines, and Run button */}
-            <table className="table-responsive table-striped table-bordered">
+            <table className="table table-striped table-bordered border">
               <thead>
                 <tr>
                   <th>Command</th>
