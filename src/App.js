@@ -305,7 +305,7 @@ function App() {
             <h5>* Command and Machine Information</h5>
 
             {/* Table to show the commands, machines, and Run button */}
-            <table className="table">
+            <table className="table-responsive table-striped table-bordered">
               <thead>
                 <tr>
                   <th>Command</th>
@@ -316,7 +316,7 @@ function App() {
               <tbody>
                 {commandsList.map((item) => (
                   <tr key={item.id}>
-                    <td>{item.command}</td>
+                    <td className="text-break">{item.command}</td>
                     <td>{item.machines}</td>
                     <td>
                       <button
