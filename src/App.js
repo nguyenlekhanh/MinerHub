@@ -24,6 +24,13 @@ function App() {
   const [runCommand, setRunCommand] = useState(false);
   const [stopCommand, setStopCommand] = useState(false);
   
+  useEffect(() => {
+    const managerKey = getCookie('manager_key');
+    if (managerKey) {
+      setKey(managerKey);
+    }
+  }, []);
+
   // Effect to decrease the countdown every second
   useEffect(() => {
     if (countdown <= 0) {

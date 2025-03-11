@@ -25,10 +25,6 @@ export const WebSocketProvider = ({ children }) => {
     socketRef.current.on('connect', () => {
       console.log('Connected to server!');
       setIsServerConnected(true);
-      const managerKey = getCookie('manager_key');
-      if (managerKey) {
-        setKey(managerKey);
-      }
     });
 
     socketRef.current.on('disconnect', () => {
