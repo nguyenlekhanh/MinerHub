@@ -113,6 +113,7 @@ function App() {
       if (command && selectedMachines.length) {
 
         socketRef.current.emit('send-command', {
+            'key': key,
             'client_ids': selectedMachines,
             'miner_command': command,
             'action': 1  //execute
@@ -136,6 +137,7 @@ function App() {
       setStopCommand(false);
 
       socketRef.current.emit('send-command', {
+          'key': key,
           'client_ids': selectedMachines,
           'miner_command': command,
           'action': 2  //execute

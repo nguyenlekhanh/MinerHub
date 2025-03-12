@@ -41,7 +41,7 @@ export const WebSocketProvider = ({ children }) => {
     });
 
     socketRef.current.on('manager-key-success', (data) => {
-      console.log('cookie save: ' + data.managerKey);
+      //console.log('cookie save: ' + data.managerKey);
       setCookie('manager_key', data.managerKey, 360); 
     });
 
