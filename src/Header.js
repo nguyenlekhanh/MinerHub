@@ -15,6 +15,9 @@ const Header = () => {
                 <Link to="/faq">FAQ</Link>
               </li>
               <li className="nav-item col-6 col-md-auto ms-2">
+                <Link to="/feedback">Feedback</Link>
+              </li>
+              <li className="nav-item col-6 col-md-auto ms-2">
                 <Link to="/donate">Donate</Link>
               </li>
             </ul>

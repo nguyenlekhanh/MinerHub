@@ -9,6 +9,7 @@ import Header from './Header'
 import Footer from './Footer'
 import FaqPage from './FaqPage';
 import DonatePage from './DonatePage';
+import FeedbackPage from './FeedbackPage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -20,6 +21,7 @@ root.render(
           <Routes>
             <Route path="/" element={<App />} />
             <Route path="/faq" element={<FaqPage />} />
+            <Route path="/feedback" element={<FeedbackPage />} />
             <Route path="/donate" element={<DonatePage />} />
             {/* Other routes for home, docs, etc. */}
           </Routes>
