@@ -232,13 +232,33 @@ function App() {
 
             </form>
 
-            <h5>Step 2: Download the client software and install it on the computer you want to control.
-                <br/>- Copy your key into your machine's config.json file.
-                <br/>- Run the software.
-            </h5>
-            <p>Link Linux, Link Window, Link Macos</p>
+            <h5>Step 2: Download the client software and install it on the computer you want to control.</h5>
 
-            <h5>Step 3: Check if your machine is connected here and run a command to manage it.</h5>
+            <h6 style={{fontSize: "1.15rem"}}>
+                <ul>
+                  <li>
+                    <a target="_blank" href="https://1drv.ms/u/s!Ahfln75DwNoZgl5Akrad8fPb-uYm?e=IuX9MU">
+                      Minerhub-Window
+                    </a>
+                  </li>
+                  <li>
+                    <a target="_blank" href="https://1drv.ms/u/s!Ahfln75DwNoZgl0H0ijmS6aDcWHQ?e=We6drQ">
+                      Minerhub-Linux
+                    </a>
+                  </li>
+                  <li>
+                    <a target="_blank" href="https://1drv.ms/u/s!Ahfln75DwNoZglx1oenubXyqdyE3?e=bVksNg">
+                      Minerhub-MacOs
+                    </a>
+                  </li>
+                </ul>
+                - After downloading, copy the key above into your machine's config.json file.
+                <br/>- Run the software.
+                <br/>- Wait for it to connect, and your machine name will appear below.
+                <br/>- That's it! You will manage your machine with step 3 below.
+            </h6>
+            <br/>
+            <h5>Step 3: Check if your machines is connected here and run a command to manage it.</h5>
             <form 
               onSubmit={handleCommand}
             >
