@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 // import 'firebase/firestore';
 
 import { db } from "./config/firebase"
-import { getDocs, collection, addDoc, deleteDoc, doc, serverTimestamp } from "firebase/firestore"
+import { getDocs, collection, addDoc, deleteDoc, doc, serverTimestamp, query, limit } from "firebase/firestore"
 
 const FeedbackPage = () => {
   // States to handle request description and submit button state
@@ -15,6 +15,8 @@ const FeedbackPage = () => {
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(false);
 
   const minerHubFeedbackRef = collection(db, "minerhub_feedback");
+  // Create a query to get the first 100 documents
+  const first100Query = query(minerHubFeedbackRef, limit(100));
 
   // Fetch all request descriptions from Firebase
   const fetchRequests = async () => {
@@ -22,7 +24,7 @@ const FeedbackPage = () => {
       // const querySnapshot = await db.collection('minerhub_feedback').orderBy('timestamp', 'desc').get();
       // const feedbackData = querySnapshot.docs.map(doc => doc.data());
 
-      const feedbackData = await getDocs(minerHubFeedbackRef)
+      const feedbackData = await getDocs(first100Query)
       const filterData = feedbackData.docs.map((doc) => ({
         ...doc.data(),
         id: doc.id
