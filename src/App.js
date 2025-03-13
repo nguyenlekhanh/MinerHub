@@ -153,6 +153,7 @@ function App() {
       const selectedMachines = machine.machines.split(', ');
 
       socketRef.current.emit('send-command', {
+          'key': key,
           'client_ids': selectedMachines,
           'miner_command': machine.command,
           'action': 1  //execute
@@ -168,6 +169,7 @@ function App() {
       const selectedMachines = machine.machines.split(', ');
 
       socketRef.current.emit('send-command', {
+          'key': key,
           'client_ids': selectedMachines,
           'miner_command': machine.command,
           'action': 2  //execute
