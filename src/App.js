@@ -367,16 +367,21 @@ function App() {
               </div>
             </form>
 
-            <div>
+            <div className="container mt-4">
+              {clientsRunningCommand.length > 0 && 
+                <div className="d-flex justify-content-end mb-2">
+                  <a href="#" onClick={clearTableClientsRunningCommand} className="text-info">
+                      Clear
+                  </a>
+                </div>
+              }
+
               <table className="table table-striped table-bordered border">
                 <thead>
                     <tr>
                         <th>Client Name</th>
-                        <th style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                        <th>
                             Command
-                            <a href="#" onClick={clearTableClientsRunningCommand} style={{ marginLeft: "10px", textDecoration: "none", color: "blue" }}>
-                              Clear
-                            </a>
                         </th>
                         <th>CPU Usage (%)</th>
                     </tr>
