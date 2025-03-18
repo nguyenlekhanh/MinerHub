@@ -187,6 +187,11 @@ function App() {
     setClientsRunningCommand([]);
   };
 
+  const clearTableCommandsList = (e) => {
+    e.preventDefault();
+    setCommandsList([]);
+  };
+
   const handleRunFromList = (id) => {
     const machine = commandsList.find((command) => command.id === id);
 
@@ -402,6 +407,14 @@ function App() {
           {/* Section 2: Right side - 50% width */}
           <div className="col-md-6">
             <h5>* Command and Machine Information</h5>
+
+            {commandsList.length > 0 && 
+              <div className="d-flex justify-content-end mb-2">
+                <a href="#" onClick={clearTableCommandsList} className="text-info">
+                    Clear
+                </a>
+              </div>
+            }
 
             {/* Table to show the commands, machines, and Run button */}
             <table className="table table-striped table-bordered border">
