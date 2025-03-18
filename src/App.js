@@ -21,8 +21,11 @@ function App() {
   const [commandsList, setCommandsList] = useState([]);
   //const [alertMessage, setAlertMessage] = useState('');
 
+  const [clientsRunningCommand, setClientsRunningCommand] = useState([]);
+
   const [runCommand, setRunCommand] = useState(false);
   const [stopCommand, setStopCommand] = useState(false);
+  const [getClientCommand, setGetClientCommand] = useState(false);
   
   useEffect(() => {
     const managerKey = getCookie('manager_key');
@@ -30,6 +33,23 @@ function App() {
       setKey(managerKey);
     }
   }, []);
+
+  useEffect(() => {
+    if (socketRef.current) {  
+      
+      socketRef.current.on('client-running-command', (data) => {
+        console.log(data);
+        const newData = {
+            client_name: data.client_name,
+            client_command: data.client_command,
+            cpu_percent: data.cpu_percent
+        };
+
+        setClientsRunningCommand((prevClientsRunningCommand) => [newData, ...prevClientsRunningCommand].slice(0, 20));
+        
+      });
+    }
+  }, [socketRef.current]);
 
   // Effect to decrease the countdown every second
   useEffect(() => {
@@ -101,6 +121,8 @@ function App() {
       handleRun();
     } else if(stopCommand) {
       handleStop();
+    } else if(getClientCommand) {
+      handleGetClientCommand();
     }
 
   };
@@ -121,8 +143,8 @@ function App() {
 
         //add to command list from right
         setCommandsList([
-          ...commandsList,
-          { command, machines: selectedMachines.join(', '), id: Date.now() }
+          { command, machines: selectedMachines.join(', '), id: Date.now() },
+          ...commandsList
         ]);
         //setCommand('');
         //setSelectedMachines([]);
@@ -145,6 +167,20 @@ function App() {
     }
     setStopCommand(false);
   };
+
+  const handleGetClientCommand = () => {
+    
+    if(getClientCommand) {
+      setGetClientCommand(false);
+
+      socketRef.current.emit('server-get-client-command', {
+          'key': key,
+          'client_ids': selectedMachines,
+          'action': 3  //get-client-command
+      });
+    }
+    setGetClientCommand(false);
+  }
 
   const handleRunFromList = (id) => {
     const machine = commandsList.find((command) => command.id === id);
@@ -317,11 +353,35 @@ function App() {
                 <button className="btn btn-danger me-2" type="submit" onClick={(e) => setRunCommand(true)}>
                   Run Command
                 </button>
-                <button className="btn btn-warning" type="submit" onClick={(e) => setStopCommand(true)}>
+                <button className="btn btn-warning me-2" type="submit" onClick={(e) => setStopCommand(true)}>
                   Stop
+                </button>
+                <button className="btn btn-info" type="submit" onClick={() => setGetClientCommand(true)}>
+                  Check
                 </button>
               </div>
             </form>
+
+            <div>
+              <table className="table table-striped table-bordered border">
+                <thead>
+                    <tr>
+                        <th>Client Name</th>
+                        <th>Command</th>
+                        <th>CPU Usage (%)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {clientsRunningCommand.map((client, index) => (
+                        <tr key={index}>
+                            <td className="text-break">{client.client_name}</td>
+                            <td className="text-break">{client.client_command}</td>
+                            <td className="text-break">{client.cpu_percent}%</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+            </div>
           </div>
 
           {/* Section 2: Right side - 50% width */}
