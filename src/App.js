@@ -182,6 +182,11 @@ function App() {
     setGetClientCommand(false);
   }
 
+  const clearTableClientsRunningCommand = (e) => {
+    e.preventDefault();
+    setClientsRunningCommand([]);
+  };
+
   const handleRunFromList = (id) => {
     const machine = commandsList.find((command) => command.id === id);
 
@@ -367,7 +372,12 @@ function App() {
                 <thead>
                     <tr>
                         <th>Client Name</th>
-                        <th>Command</th>
+                        <th style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                            Command
+                            <a href="#" onClick={clearTableClientsRunningCommand} style={{ marginLeft: "10px", textDecoration: "none", color: "blue" }}>
+                              Clear
+                            </a>
+                        </th>
                         <th>CPU Usage (%)</th>
                     </tr>
                 </thead>
